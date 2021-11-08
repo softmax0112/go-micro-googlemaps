@@ -11,7 +11,7 @@ The test.py file in the main subdirectory has the code that demonstrates use.
 To call the service, prepare JSON formatted **data** in the form of: `{"location": 
 "destination"}`. 
 
-Then added the prepared **data** to the following URL:
+Then add the prepared **data** to the following URL:
 `https://map-microservice.herokuapp.com/get_map/"your data here"` without the quotations.
 
 The service will return a JSON formatted dictionary with the map embed URL. There 
