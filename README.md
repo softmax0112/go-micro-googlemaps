@@ -25,4 +25,4 @@ call = "https://map-microservice.herokuapp.com/get_map/{"location": "Grand Canyo
 
 response = json.dumps(requests.get(call).json())
 
-# this would return {"url": "requested url here", "success": "true}
+# this would return {"url": "requested url here", "success": "true"}
