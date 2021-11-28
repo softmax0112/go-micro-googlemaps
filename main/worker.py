@@ -30,6 +30,7 @@ def call_maps_api(location):
 
     formatted = location.replace(", ", ",", 1).replace(", ", " ").replace(" ", "+")
 
+
     api_key = os.getenv('API_KEY')
 
     embed_url = 'https://www.google.com/maps/embed/v1/' + 'place' + '?key=' + api_key + '&q=' + formatted
@@ -37,6 +38,8 @@ def call_maps_api(location):
     return embed_url
 
 def on_request(ch, method, props, body):
+
+    print(is_json(body))
 
     if is_json(body):
         request = json.loads(body)
@@ -51,12 +54,16 @@ def on_request(ch, method, props, body):
         else:
             response = json.dumps({"success": False, "error": "Incorrect JSON format"})
 
-        ch.basic_publish(exchange = '',
-                      routing_key = props.reply_to,
-                      properties = pika.BasicProperties(correlation_id = \
-                                      props.correlation_id),
-                      body=json.dumps(response))
-        ch.basic_ack(delivery_tag=method.delivery_tag)
+    else:
+        response = json.dumps({"success": False, "error": "Incorrect format"})
+
+    ch.basic_publish(exchange = '',
+                  routing_key = props.reply_to,
+                  properties = pika.BasicProperties(correlation_id = \
+                                  props.correlation_id),
+                  body=json.dumps(response))
+    ch.basic_ack(delivery_tag=method.delivery_tag)
+
 
 channel.basic_qos(prefetch_count=1)
 channel.basic_consume(queue='get_map',
