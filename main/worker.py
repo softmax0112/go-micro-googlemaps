@@ -39,8 +39,6 @@ def call_maps_api(location):
 
 def on_request(ch, method, props, body):
 
-    print(is_json(body))
-
     if is_json(body):
         request = json.loads(body)
 
