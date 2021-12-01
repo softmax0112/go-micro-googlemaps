@@ -30,7 +30,6 @@ def call_maps_api(location):
 
     formatted = location.replace(", ", ",", 1).replace(", ", " ").replace(" ", "+")
 
-
     api_key = os.getenv('API_KEY')
 
     embed_url = 'https://www.google.com/maps/embed/v1/' + 'place' + '?key=' + api_key + '&q=' + formatted
@@ -38,7 +37,9 @@ def call_maps_api(location):
     return embed_url
 
 def on_request(ch, method, props, body):
-
+    '''
+    Handles requests to the service
+    '''
     if is_json(body):
         request = json.loads(body)
 

@@ -58,7 +58,9 @@ def index():
 
 @app.route('/get_map/<msg>')
 def get_payload(msg):
-
+    '''
+    Makes calls to maps client
+    '''
     maps_rpc = MapsRpcClient()
     response = maps_rpc.call(msg.replace("'", '"'))
     return response
